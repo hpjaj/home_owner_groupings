@@ -1,6 +1,6 @@
 RSpec.describe HomePerson do
   describe "#shared_with_plus_me" do
-    it "blah" do
+    it "returns an array of the HomePerson's person_id + its shared_with ids" do
       mary = HomePerson.build(2, 234, [123])
       elle = HomePerson.build(2, 345, [123, 234])
       alex = HomePerson.build(2, 456, [])
