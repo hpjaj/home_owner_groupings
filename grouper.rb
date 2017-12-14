@@ -1,9 +1,9 @@
 class Grouper
-  attr_reader :results, :extras
+  attr_reader :owner_groups, :considerations
 
   def initialize
-    @results = []
-    @extras = []
+    @owner_groups = []
+    @considerations = []
   end
 
   def self.for(home_people)
@@ -14,7 +14,7 @@ class Grouper
     split_instant_results_from_considerations(home_people)
     eliminate_already_accounted_for_sharings
 
-    results.empty? ? extras.uniq : results.uniq
+    owner_groups.empty? ? considerations.uniq : owner_groups.uniq
   end
 
 private
@@ -22,18 +22,18 @@ private
   def split_instant_results_from_considerations(home_people)
     uniq_sharings(home_people).each do |sharing|
       if sharing.length == 1 || sharing.length == 2
-        results << sharing
+        owner_groups << sharing
       else
-        extras << sharing
+        considerations << sharing
       end
     end
   end
 
   def eliminate_already_accounted_for_sharings
-    extras.each do |extra|
-      results.each do |result|
-        if (result & extra).empty?
-          results << extra
+    considerations.each do |consideration|
+      owner_groups.each do |owner_group|
+        if (owner_group & consideration).empty?
+          owner_groups << consideration
         end
       end
     end
