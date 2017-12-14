@@ -11,15 +11,15 @@ class Grouper
   end
 
   def for(home_people)
-    split_instant_results_from_considerations(home_people)
-    eliminate_already_accounted_for_sharings
+    split_instant_owner_groups_from_considerations(home_people)
+    include_non_accounted_for_considerations
 
     owner_groups.empty? ? considerations.uniq : owner_groups.uniq
   end
 
 private
 
-  def split_instant_results_from_considerations(home_people)
+  def split_instant_owner_groups_from_considerations(home_people)
     uniq_sharings(home_people).each do |sharing|
       if sharing.length == 1 || sharing.length == 2
         owner_groups << sharing
@@ -29,7 +29,7 @@ private
     end
   end
 
-  def eliminate_already_accounted_for_sharings
+  def include_non_accounted_for_considerations
     considerations.each do |consideration|
       owner_groups.each do |owner_group|
         if (owner_group & consideration).empty?
