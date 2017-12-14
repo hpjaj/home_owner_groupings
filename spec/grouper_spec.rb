@@ -44,7 +44,7 @@ RSpec.describe Grouper do
       elle = HomePerson.build(2, 345, [123, 234])
       alex = HomePerson.build(2, 456, [567])
       fran = HomePerson.build(2, 567, [456])
-      home_people = [john, mary, elle, alex]
+      home_people = [john, mary, elle, alex, fran]
 
       expect(Grouper.for(home_people)).to match_array [[123, 234, 345], [456, 567]]
     end
@@ -53,10 +53,10 @@ RSpec.describe Grouper do
       john = HomePerson.build(2, 123, [234, 345, 999])
       mary = HomePerson.build(2, 234, [123, 345, 999])
       elle = HomePerson.build(2, 345, [123, 234, 999])
-      elle = HomePerson.build(2, 999, [123, 234, 345])
+      jack = HomePerson.build(2, 999, [123, 234, 345])
       alex = HomePerson.build(2, 456, [567])
       fran = HomePerson.build(2, 567, [456])
-      home_people = [john, mary, elle, alex]
+      home_people = [john, mary, elle, jack, alex, fran]
 
       expect(Grouper.for(home_people)).to match_array [[123, 234, 345, 999], [456, 567]]
     end
